@@ -1,0 +1,3 @@
+/Users/oleg/myfiles/ЛЭТИ/Прога/Лабы/KurvaLabirint/cmake-build-debug/CMakeFiles/KurvaLabirint.dir
+/Users/oleg/myfiles/ЛЭТИ/Прога/Лабы/KurvaLabirint/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/oleg/myfiles/ЛЭТИ/Прога/Лабы/KurvaLabirint/cmake-build-debug/CMakeFiles/rebuild_cache.dir
