@@ -6,6 +6,33 @@
 int key;
 int width, height;
 int PosX = 1, PosY = 1;
+int position = 0;
+int n_button;
+
+void menu() {
+    printw("%s", "Labirint by Tikhanov Oleg\n");
+    printw("%s", "ver 0.1\n");
+    printw("%s", "\n");
+    printw("%s", "Перед использованием прочитайте инструкцию 3 п.\n");
+    printw("%s", "-----------------\n");
+    printw("%s", "\n");
+
+    char screen[5][35] = {
+        "1. Лабиринт",
+        "2. Посчитать путь",
+        "3. Инструкция",
+        "4. Выход",
+        "",
+    };
+
+    for (int i = 0; i <= 4; ++i) {
+        if (i == position) {
+            printw("%s  %s\n", screen[i], "<---");
+        } else {
+            printw("%s\n", screen[i]);
+        }
+    }
+}
 
 // Функция для рисования лабиринта
 void drawMaze(int width, int height, char maze[height][width], int PosX, int PosY) {
@@ -34,7 +61,7 @@ void createMaze(int width, int height, char maze[height][width]) {
     }
 }
 
-void test(char maze[height][width]) {
+void keywork(char maze[height][width]) {
     drawMaze(width, height, maze, PosX, PosY);
 
     key = getch();
@@ -51,7 +78,7 @@ void test(char maze[height][width]) {
     if (key == KEY_LEFT) {
         if (PosX > 0) PosX--;
     }
-    if (key == 49) {
+    if (key == 'b') {
         maze[PosY][PosX] = '#';
     }
     if (key == 127) {
@@ -62,26 +89,66 @@ void test(char maze[height][width]) {
 
 int main() {
     setlocale(LC_ALL, "");
-
     initscr();
-    keypad(stdscr, TRUE);
+    keypad(stdscr, FALSE);
 
-    printw("Введите размеры - ширину и высоту через пробел: ");
-    scanw("%d %d", &width, &height);
+    while (true) {
+        menu(position);
 
-    // Создаем лабиринт
-    char maze[height][width];
-    createMaze(width, height, maze);
+        n_button = getch();
+
+        if (n_button == 27) {
+            // ESC
+            n_button = getch();
+            if (n_button == 91) {
+                // enter
+                n_button = getch();
+                if (n_button == 65) {
+                    // up
+                    position = position - 1;
+                    if (position < 0) {
+                        position = 3;
+                    }
+                } else if (n_button == 66) {
+                    // down
+                    position = position + 1;
+                    if (position > 3) {
+                        position = 0;
+                    }
+                }
+            }
+        }
+
+        //1 lab
+        if ((position == 0 && n_button == 10) || n_button == 27) {
+            keypad(stdscr, TRUE);
+            clear();
+            printw("Введите размеры - ширину и высоту через пробел: ");
+            scanw("%d %d", &width, &height);
+            clear();
+            // Создаем лабиринт
+            char maze[height][width];
+            createMaze(width, height, maze);
 
 
-    while (1) {
-        // Отображаем лаб
-        test(maze);
+            while (1) {
+                // Отображаем лаб
+                keywork(maze);
 
-        if (key == 96) {
+                if (key == 27) {
+                    keypad(stdscr, FALSE);
+                    break;
+                }
+            }
+        }
+
+        //exit
+        if ((position == 3 && n_button == 10) || n_button == 27) {
             break;
         }
+
+        clear();
+        endwin();
     }
-    endwin();
     return 0;
 }
