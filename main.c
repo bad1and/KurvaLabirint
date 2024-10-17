@@ -3,7 +3,9 @@
 #include <stdlib.h>
 #include <ncurses.h>
 
-
+int key;
+int width, height;
+int PosX = 1, PosY = 1;
 
 // Функция для рисования лабиринта
 void drawMaze(int width, int height, char maze[height][width], int PosX, int PosY) {
@@ -32,11 +34,33 @@ void createMaze(int width, int height, char maze[height][width]) {
     }
 }
 
+void test(char maze[height][width]) {
+    drawMaze(width, height, maze, PosX, PosY);
+
+    key = getch();
+
+    if (key == KEY_UP) {
+        if (PosY > 0) PosY--;
+    }
+    if (key == KEY_DOWN) {
+        if (PosY < height - 1) PosY++;
+    }
+    if (key == KEY_RIGHT) {
+        if (PosX < width - 1) PosX++;
+    }
+    if (key == KEY_LEFT) {
+        if (PosX > 0) PosX--;
+    }
+    if (key == 49) {
+        maze[PosY][PosX] = '#';
+    }
+    if (key == 127) {
+        maze[PosY][PosX] = '.';
+    }
+
+}
 
 int main() {
-    int key;
-    int width, height;
-    int PosX = 1, PosY = 1;
     setlocale(LC_ALL, "");
 
     initscr();
@@ -52,28 +76,8 @@ int main() {
 
     while (1) {
         // Отображаем лаб
-        drawMaze(width, height, maze, PosX, PosY);
+        test(maze);
 
-        key = getch();
-
-        if (key == KEY_UP) {
-            if (PosY > 0) PosY--;
-        }
-        if (key == KEY_DOWN) {
-            if (PosY < height - 1) PosY++;
-        }
-        if (key == KEY_RIGHT) {
-            if (PosX < width - 1) PosX++;
-        }
-        if (key == KEY_LEFT) {
-            if (PosX > 0) PosX--;
-        }
-        if (key == 49) {
-            maze[PosY][PosX] = '#';
-        }
-        if (key == 127) {
-            maze[PosY][PosX] = '.';
-        }
         if (key == 96) {
             break;
         }
