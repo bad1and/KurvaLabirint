@@ -1,4 +1,4 @@
-University Programming Laboratory - calendar. It is executed according to the teacher's clear technical specifications (TZ).
+University Programming Laboratory - labirint. It is executed according to the teacher's clear technical specifications (TZ).
 <img width="738" alt="image" src="https://github.com/user-attachments/assets/b0ee484c-c29d-441a-b564-15be8c438db3">
 <img width="738" alt="image" src="https://github.com/user-attachments/assets/99b1a1d3-4a48-44d6-9f87-a879de7b89b7">
 <img width="740" alt="image" src="https://github.com/user-attachments/assets/65059ad3-5513-414d-a3fc-7e68828923e6">
